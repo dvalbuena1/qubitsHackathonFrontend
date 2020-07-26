@@ -11,9 +11,14 @@
       <v-btn icon @click.stop="fixed = !fixed">
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
+
+      <v-spacer></v-spacer>
+      <v-toolbar-title to="/">Qubit APP </v-toolbar-title>
+
       <v-spacer />
 
+      <!-- login button -->
+      <v-btn color="blue" style="margin:10px;" to="/login">Ingresar</v-btn>
       <!-- Overlay button -->
       <v-btn color="blue" @click="overlay = !overlay">Registrarse</v-btn>
 
