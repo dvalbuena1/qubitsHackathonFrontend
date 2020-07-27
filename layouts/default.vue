@@ -20,7 +20,7 @@
       <!-- login button -->
       <v-btn color="blue" style="margin:10px;" to="/login">Ingresar</v-btn>
       <!-- Overlay button -->
-      <v-btn color="blue" @click="overlay = !overlay">Registrarse</v-btn>
+      <v-btn color="blue" @click="overlay = true">Registrarse</v-btn>
 
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
@@ -28,45 +28,7 @@
     </v-app-bar>
 
     <!-- Generate overlay -->
-    <v-overlay :value="overlay">
-      <v-card class="mx-auto" max-width="344" outlined>
-        <v-form v-model="valid">
-          <v-container>
-            <v-row>
-              <v-btn icon @click="overlay = false">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-row>
-            <v-row>
-              <v-col>
-                <v-text-field
-                  v-model="firstname"
-                  :rules="nameRules"
-                  :counter="10"
-                  label="First name"
-                  required
-                ></v-text-field>
-                <v-text-field
-                  v-model="lastname"
-                  :rules="nameRules"
-                  :counter="10"
-                  label="Last name"
-                  required
-                ></v-text-field>
-
-                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-btn color="success">submit</v-btn>
-
-              <v-btn color="error">cancel</v-btn>
-            </v-row>
-          </v-container>
-        </v-form>
-      </v-card>
-    </v-overlay>
+    <sign-up :isVisible="overlay" @closeDialog="overlay = false" />
 
     <v-content>
       <v-container>
@@ -81,7 +43,13 @@
 </template>
 
 <script>
+import SignUp from "~/components/SignUp.vue";
+
 export default {
+  components: {
+    SignUp,
+  },
+
   data() {
     return {
       overlay: false,
@@ -104,20 +72,17 @@ export default {
       right: true,
       rightDrawer: false,
       title: "Vuetify.js",
-
-      valid: false,
-      firstname: "",
-      lastname: "",
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => v.length <= 10 || "Name must be less than 10 characters",
-      ],
-      email: "",
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+/.test(v) || "E-mail must be valid",
-      ],
     };
   },
 };
 </script>
+
+<style>
+.exit-btn {
+  margin-top: 0.5rem;
+  margin-right: 1rem;
+}
+v-card-title {
+  text-align: center;
+}
+</style>
