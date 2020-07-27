@@ -1,29 +1,17 @@
 <template>
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-
-      <v-spacer></v-spacer>
-      <v-toolbar-title to="/">Qubit APP </v-toolbar-title>
+      <v-toolbar-title to="/">Qubit APP</v-toolbar-title>
 
       <v-spacer />
 
       <!-- login button -->
-      <v-btn color="blue" style="margin:10px;" to="/login">Ingresar</v-btn>
-      <!-- Overlay button -->
-      <v-btn color="blue" @click="overlay = true">Registrarse</v-btn>
+      <v-btn v-if="!login" color="blue" style="margin:10px;" to="/login">Ingresar</v-btn>
+      <!-- register button -->
+      <v-btn v-if="!login" color="blue" @click="overlay = true">Registrarse</v-btn>
 
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
+      <v-btn icon v-if="login" to="/perfil">
+        <v-icon>mdi-face-outline</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -52,6 +40,7 @@ export default {
 
   data() {
     return {
+      login: localStorage.getItem("token"),
       overlay: false,
       clipped: false,
       drawer: false,

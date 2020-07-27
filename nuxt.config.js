@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+require('dotenv').config({ path: __dirname + '/.env' })
 
 export default {
   /*
@@ -53,11 +54,24 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
   /* Axios */
   axios: {
     baseURL: process.env.API_URL
+  },
+  /* Auth Module */
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'login', method: 'post', propertyName: 'data.token' },
+          user: false,
+          logout: false
+        }
+      }
+    }
   },
   /*
   ** vuetify module configuration

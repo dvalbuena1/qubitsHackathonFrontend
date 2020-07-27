@@ -15,10 +15,23 @@
           <v-container>
             <v-row>
               <v-col>
-                <v-text-field v-model="name" :rules="nameRules" label="Nombre" required></v-text-field>
-
-                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
                 <v-text-field
+                  prepend-icon="mdi-account"
+                  v-model="name"
+                  :rules="nameRules"
+                  label="Nombre"
+                  required
+                ></v-text-field>
+
+                <v-text-field
+                  prepend-icon="mdi-email"
+                  v-model="email"
+                  :rules="emailRules"
+                  label="E-mail"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  prepend-icon="mdi-lock"
                   :type="'password'"
                   v-model="password"
                   :rules="passwordRules"
@@ -56,14 +69,15 @@ export default {
       const result = await this.$axios.$post("auth/register", user);
 
       if (result) {
+        console.log(result);
         Swal.fire({
-        icon: "success",
-        title: "Registrado satisfactoriamente",
-        showConfirmButton: false,
-        timer: 2000
-      });
+          icon: "success",
+          title: "Registrado satisfactoriamente",
+          showConfirmButton: false,
+          timer: 2000,
+        });
         this.$router.push("login");
-        this.$emit('closeDialog');
+        this.$emit("closeDialog");
         return;
       }
 
