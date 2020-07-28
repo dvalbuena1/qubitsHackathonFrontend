@@ -1,18 +1,20 @@
 <template>
   <div>
-    <h3>
+    <h2 class="ml-6">
       Paginas de Facebook:
-    </h3>
+    </h2>
     <ul>
       <li v-bind:key="pagina.id" v-for="pagina in Paginas">
         <v-card class="mx-auto m-5 p-5" tile>
           <v-card-title>
-          {{pagina.nombre}}
-          </v-card-title>
-          <v-btn>
-          <a :href="pagina.url">Visita la pagina</a>
-          </v-btn>
-          <br>
+            {{pagina.nombre}}
+            </v-card-title>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+              <v-btn class="mr-2 mb-2">
+                <a :href="pagina.url">Visita la pagina</a>
+              </v-btn>
+            </v-card-actions>
         </v-card>
       </li>
     </ul>
@@ -23,9 +25,9 @@
 export default {
   data: () => ({
       Paginas: [
-        { nombre: 'nombre Pagina 1', url:'https://www.google.com',id: 1},
-        { nombre: 'nombre Pagina 2', url:'https://www.google.com',id: 2},
-        { nombre: 'nombre Pagina 3', url:'https://www.google.com',id: 3},
+        { nombre: 'Nombre pagina 1', url:'https://www.google.com',id: 1},
+        { nombre: 'Nombre pagina 2', url:'https://www.google.com',id: 2},
+        { nombre: 'Nombre pagina 3', url:'https://www.google.com',id: 3},
       ],
     }),
 }

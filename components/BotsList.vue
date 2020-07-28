@@ -1,15 +1,39 @@
 <template>
   <div>
-    <h3>
+    <h2 class="ml-6">
       Bots:
-    </h3>
+    </h2>
     <ul>
       <li v-bind:key="bot.id" v-for="bot in Bots">
         <v-card class="mx-auto m-5 p-5" tile>
           <v-card-title>
           {{bot.nombre}}
           </v-card-title>
-          <br>
+
+          <p class="ml-4">Pagina:</p>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="error"
+              class="mr-6"
+            >
+            eliminar bot
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </li>
+    </ul>
+    <ul>
+      <li>
+        <v-card>
+          <v-card-actions>
+            <v-btn
+                  color="success"
+                  class="ml-2 mb-2"
+                >
+                Agregar bot
+                </v-btn>
+          </v-card-actions>
         </v-card>
       </li>
     </ul>

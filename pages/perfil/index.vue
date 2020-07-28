@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-row class="mr-16 pr-16">
-      <v-col :cols="2">
+      <v-col :cols="3">
         <v-card
           class="mx-auto"
-          max-width="300"
+
           tile
         >
         <!-- lista de opciones en el menu on click se muestra el componente que referencia la opcion-->
@@ -43,7 +43,7 @@
           </v-list>
         </v-card>
       </v-col>
-      <v-col :cols="10">
+      <v-col :cols="9">
         <paginasList v-if="paginasSel"/>
         <BotsList v-if="botsSelected"/>
         <UserInfo v-if="infoSelected"/>

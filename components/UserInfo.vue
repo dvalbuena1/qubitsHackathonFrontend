@@ -1,12 +1,62 @@
 <template>
   <div>
-    <h3>
+    <h2 class="ml-6">
       Informacion:
-    </h3>
+    </h2>
     <ul>
-      <li v-bind:key="info.id" v-for="info in Info">
+      <li>
         <v-card class="mx-auto m-5 p-5" tile>
-          <p>{{info.text}}</p>
+          <v-row>
+            <v-col :cols="3" class="ml-4 mt-3">
+              Nombre:
+            </v-col>
+            <v-col :cols="8">
+              <v-text-field
+                :value=nombre
+                label="Solo"
+                solo
+                readonly
+              >
+              </v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col :cols="3" class="ml-4 mt-3">
+              Email:
+            </v-col>
+            <v-col :cols="8">
+              <v-text-field
+                :value=email
+                label="Solo"
+                solo
+                readonly
+              >
+              </v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col :cols="3" class="ml-4 mt-3">
+              Contraseña:
+            </v-col>
+            <v-col :cols="8">
+              <v-text-field
+                :value=password
+                label="Solo"
+                solo
+                readonly
+              >
+              </v-text-field>
+            </v-col>
+          </v-row>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="blue"
+              class="mr-4 mb-4"
+            >
+              Cambiar
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </li>
     </ul>
@@ -16,12 +66,20 @@
 <script>
 export default {
 data: () => ({
-      Info: [
-        { text: 'Pagina1', id: 1},
-        { text: 'Pagina2', id: 2},
-        { text: 'Pagina3', id: 3},
-      ],
+      nombre: "TestNombre",
+      email: "TestEmail",
+      password: "*********",
+      usuario:{}
     }),
+async created(){
+  const config = {
+    headers:{
+
+    }
+  }
+
+  const res = await this.$axios.$get("/user",config)
+}
 }
 </script>
 
@@ -29,7 +87,7 @@ data: () => ({
 ul {
   list-style-type: none;
 }
-p{
-  font-size: large;
+.v-text-field{
+  font-size: 200;
 }
 </style>
