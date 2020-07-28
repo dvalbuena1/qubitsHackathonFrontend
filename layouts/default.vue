@@ -1,6 +1,8 @@
 <template>
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
+
+      <v-spacer></v-spacer>
       <v-toolbar-title to="/">Qubit APP</v-toolbar-title>
 
       <v-spacer />
@@ -10,7 +12,7 @@
       <!-- register button -->
       <v-btn v-if="!login" color="blue" @click="overlay = true">Registrarse</v-btn>
 
-      <v-btn icon v-if="login" to="/perfil">
+      <v-btn icon v-if="login"  to="/perfil">
         <v-icon>mdi-face-outline</v-icon>
       </v-btn>
     </v-app-bar>

@@ -51,11 +51,8 @@ export default {
         email: this.email,
         password: this.password,
       };
-      const res = await this.$axios.post("/auth/signin", data);
 
-
-
-
+      const res = await this.$auth.loginWith("local", { data });
       console.log(res);
       if(resutl)
       {
