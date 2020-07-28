@@ -44,6 +44,7 @@
 
 <script>
 export default {
+  layout: "login",
   methods: {
     async onSubmit() {
       var data = {
@@ -51,7 +52,16 @@ export default {
         password: this.password,
       };
       const res = await this.$axios.post("/auth/signin", data);
+
+
+
+
       console.log(res);
+      if(resutl)
+      {
+        console.log(result);
+
+      }
     },
   },
   props: {
@@ -60,7 +70,15 @@ export default {
   data() {
     return {
       password: "",
+      passwordRules: [
+        (v) => !!v || "Contraseña requerida",
+        (v) => Const.passwordPattern.test(v) || "Contraseña invalida",
+      ],
       email: "",
+      emailRules: [
+        (v) => !!v || "E-mail requerido",
+        (v) => Const.emailPattern.test(v) || "El E-mail debe ser valido",
+      ],
     };
   },
 };
