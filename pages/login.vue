@@ -44,14 +44,26 @@
 
 <script>
 export default {
+  auth: 'guest',
+  layout: "login",
   methods: {
     async onSubmit() {
       var data = {
         email: this.email,
         password: this.password,
       };
-      const res = await this.$axios.post("/auth/signin", data);
-      console.log(res);
+
+      this.$nuxt.$loading.start();
+
+      const res = await this.$auth.loginWith("local", { data });
+      this.$auth.setUserToken(res.data.token);
+      console.log(this.$auth.$storage);
+
+      this.$auth.setUser(res.data.user);
+
+      this.$router.push("/perfil");
+
+      this.$nuxt.$loading.finish();
     },
   },
   props: {
@@ -60,7 +72,15 @@ export default {
   data() {
     return {
       password: "",
+      passwordRules: [
+        (v) => !!v || "Contraseña requerida",
+        (v) => Const.passwordPattern.test(v) || "Contraseña invalida",
+      ],
       email: "",
+      emailRules: [
+        (v) => !!v || "E-mail requerido",
+        (v) => Const.emailPattern.test(v) || "El E-mail debe ser valido",
+      ],
     };
   },
 };

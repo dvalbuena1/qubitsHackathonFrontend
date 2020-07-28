@@ -14,7 +14,7 @@
               <!-- <v-list-item
                 v-for="(item, i) in items"
                 :key="i"
-              > -->
+              >-->
               <v-list-item v-on:click="infSelected()">
                 <v-list-item-icon>
                   <v-icon v-text="items[0].icon"></v-icon>
@@ -53,45 +53,45 @@
 </template>
 
 <script>
-import paginasList from "../../components/paginasList"
-import BotsList from "../../components/BotsList"
-import UserInfo from "../../components/UserInfo"
+import paginasList from "../../components/paginasList";
+import BotsList from "../../components/BotsList";
+import UserInfo from "../../components/UserInfo";
 export default {
+  auth: true,
   data: () => ({
-      item: 1,
-      items: [
-        { text: 'Informacion', icon: 'mdi-account' },
-        { text: 'Paginas', icon: 'mdi-facebook' },
-        { text: 'Bots', icon: 'mdi-tooltip-account' },
-      ],
-      paginasSel:false,
-      infoSelected:false,
-      botsSelected:false
-    }),
-  components:{
+    item: 1,
+    items: [
+      { text: "Informacion", icon: "mdi-account" },
+      { text: "Paginas", icon: "mdi-facebook" },
+      { text: "Bots", icon: "mdi-tooltip-account" },
+    ],
+    paginasSel: false,
+    infoSelected: false,
+    botsSelected: false,
+  }),
+  components: {
     paginasList,
-    BotsList
+    BotsList,
   },
-  methods:{
-    pagSelected(){
-      this.paginasSel = true
-      this.infoSelected = false
-      this.botsSelected = false
+  methods: {
+    pagSelected() {
+      this.paginasSel = true;
+      this.infoSelected = false;
+      this.botsSelected = false;
     },
-    infSelected(){
-      this.paginasSel = false
-      this.infoSelected = true
-      this.botsSelected = false
+    infSelected() {
+      this.paginasSel = false;
+      this.infoSelected = true;
+      this.botsSelected = false;
     },
-    botSelected(){
-      this.paginasSel = false
-      this.infoSelected = false
-      this.botsSelected = true
-    }
-  }
-}
+    botSelected() {
+      this.paginasSel = false;
+      this.infoSelected = false;
+      this.botsSelected = true;
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>
