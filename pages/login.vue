@@ -44,6 +44,7 @@
 
 <script>
 export default {
+  auth: 'guest',
   layout: "login",
   methods: {
     async onSubmit() {
@@ -52,11 +53,17 @@ export default {
         password: this.password,
       };
 
+      this.$nuxt.$loading.start();
+
       const res = await this.$auth.loginWith("local", { data });
+      this.$auth.setUserToken(res.data.token);
+      console.log(this.$auth.$storage);
 
-      //this.$auth.setUser(res.data.user);
+      this.$auth.setUser(res.data.user);
 
-      this.$router.push("perfil");
+      this.$router.push("/perfil");
+
+      this.$nuxt.$loading.finish();
     },
   },
   props: {

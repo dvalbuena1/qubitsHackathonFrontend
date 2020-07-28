@@ -66,12 +66,19 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'auth/signin', method: 'post', propertyName: 'data.token' },
+          login: { url: '/auth/signin', method: 'post' },
           user: false,
-          logout: false
-        }
+          logout: { url: '/auth/signout', method: 'get' }
+        },
       }
+    },
+    redirect: {
+      login: '/perfil',
+      logout: '/'
     }
+  },
+  router: {
+    middleware: ['auth']
   },
   /*
   ** vuetify module configuration

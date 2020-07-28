@@ -1,13 +1,12 @@
 <template>
-<div>
-  <h2>Qubit APP</h2>
-</div>
+  <div>
+    <h2>Qubit APP</h2>
+  </div>
 </template>
 
 <script>
-
-
 export default {
+  auth: false,
   head() {
     return {
       title: "Qubit APP",
@@ -15,11 +14,10 @@ export default {
         {
           hid: "Welcome",
           name: "welcome",
-          content: "Welcome to Qubit APP"
-        }
-      ]
+          content: "Welcome to Qubit APP",
+        },
+      ],
     };
-  }
-
-}
+  },
+};
 </script>

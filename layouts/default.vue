@@ -7,12 +7,15 @@
       <v-spacer />
 
       <!-- login button -->
-      <v-btn v-if="!login" color="blue" style="margin:10px;" to="/login">Ingresar</v-btn>
+      <v-btn v-if="!isAuthenticated" color="blue" style="margin:10px;" to="/login">Ingresar</v-btn>
       <!-- register button -->
-      <v-btn v-if="!login" color="blue" @click="overlay = true">Registrarse</v-btn>
-
-      <v-btn icon v-if="login" to="/perfil">
+      <v-btn v-if="!isAuthenticated" color="blue" @click="overlay = true">Registrarse</v-btn>
+      <!-- Profile button -->
+      <v-btn icon v-if="isAuthenticated" to="/perfil">
         <v-icon>mdi-face-outline</v-icon>
+      </v-btn>
+      <v-btn icon v-if="isAuthenticated" @click.prevent="logOut">
+        <v-icon>mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -33,14 +36,21 @@
 
 <script>
 import SignUp from "~/components/SignUp.vue";
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
-  computed:{
-    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  computed: {
+    ...mapGetters(["isAuthenticated"]),
   },
+
   components: {
     SignUp,
+  },
+
+  methods:{
+    logOut(){
+      this.$auth.logout(this.$auth.$storage);
+    }
   },
 
   data() {
