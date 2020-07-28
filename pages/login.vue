@@ -53,12 +53,10 @@ export default {
       };
 
       const res = await this.$auth.loginWith("local", { data });
-      console.log(res);
-      if(resutl)
-      {
-        console.log(result);
 
-      }
+      //this.$auth.setUser(res.data.user);
+
+      this.$router.push("perfil");
     },
   },
   props: {
