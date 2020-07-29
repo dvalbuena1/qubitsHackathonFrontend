@@ -17,6 +17,19 @@
             </v-card-actions>
         </v-card>
       </li>
+      <li>
+          <v-card>
+            <v-card-actions>
+              <v-btn
+                    color="success"
+                    class="ml-2 mb-2"
+                    to="/perfil/agregarPagina"
+                  >
+                  Agregar Pagina
+                  </v-btn>
+            </v-card-actions>
+          </v-card>
+        </li>
     </ul>
   </div>
 </template>
