@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  auth: 'guest',
+  auth: "guest",
   layout: "login",
   methods: {
     async onSubmit() {
@@ -54,16 +54,21 @@ export default {
       };
 
       this.$nuxt.$loading.start();
+      try {
+        const res = await this.$auth.loginWith("local", { data });
+        this.$nuxt.$loading.finish();
 
-      const res = await this.$auth.loginWith("local", { data });
-      this.$auth.setUserToken(res.data.token);
-      console.log(this.$auth.$storage);
+        this.$auth.setUserToken(res.data.token);
+        console.log(this.$auth.$storage);
 
-      this.$auth.setUser(res.data.user);
+        this.$auth.setUser(res.data.user);
+        localStorage.setItem('id', res.data.user.id);
 
-      this.$router.push("/perfil");
+      } catch (error) {
+        this.$nuxt.$loading.finish();
 
-      this.$nuxt.$loading.finish();
+        console.log(error.response);
+      }
     },
   },
   props: {

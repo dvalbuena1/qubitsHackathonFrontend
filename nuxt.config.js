@@ -70,11 +70,14 @@ export default {
           user: false,
           logout: { url: '/auth/signout', method: 'get' }
         },
+        tokenType: '',
       }
     },
     redirect: {
-      login: '/perfil',
-      logout: '/'
+      login: '/login',
+      logout: '/',
+      home: '/perfil',
+      callback: false
     }
   },
   router: {

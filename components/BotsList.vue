@@ -30,6 +30,7 @@
             <v-btn
                   color="success"
                   class="ml-2 mb-2"
+                  to="/perfil/Botconfig"
                 >
                 Agregar bot
                 </v-btn>
