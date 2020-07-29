@@ -78,6 +78,7 @@ export default {
       this.paginasSel = true;
       this.infoSelected = false;
       this.botsSelected = false;
+      console.log(this.$auth.$storage.$state)
     },
     infSelected() {
       this.paginasSel = false;
