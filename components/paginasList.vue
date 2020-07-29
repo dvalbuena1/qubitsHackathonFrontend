@@ -27,6 +27,13 @@
                   >
                   Agregar Pagina
                   </v-btn>
+                  <v-btn
+                  color="primary"
+                  class="ml-2 mb-2"
+                  to="/comoAgregarPagina"
+                  >
+                  ¿Cómo agregar Página?
+                  </v-btn>
             </v-card-actions>
           </v-card>
         </li>
