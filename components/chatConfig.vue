@@ -1,68 +1,64 @@
 <template>
   <div>
     <div>
-      <h2>
-        Escriba la pregunta que le realizara al cliente:
-      </h2>
-      <v-form @submit.prevent = "preguntaDone">
-        <v-text-field
-                label="Pregunta"
-                outlined
-                required
-                :v-model="pregunta"
-                :disabled="preguntaComp"
-              >
-        </v-text-field>
-      </v-form>
+      <h2>{{json.menu}}</h2>
+      <v-text-field label="Mensaje bienvenida" outlined required v-model="json.mensaje"></v-text-field>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    json: {},
+  },
   data: () => ({
-    numReplies = 0,
+    /* numReplies: 0,
     preguntaComp: false,
-    pregunta:"",
-    mensajesNode:{
-      message:"",
-      options:[],
-      type:"",
-      id: 0
+    pregunta: "",
+    mensajesNode: {
+      message: "",
+      options: [],
+      type: "",
+      id: 0,
     },
-    actual = mensajesNode,
-    mensaje:"",
-    type:"",
-    id:0
+    actual: mensajesNode,
+    mensaje: "",
+    type: "",
+    id: 0, */
   }),
-  methods:{
-    preguntaDone(){
-      this.preguntaComp = true
+  /* methods: {
+    preguntaDone() {
+      this.preguntaComp = true;
     },
-    addMessage(){
-      let nodeAdd = {message = this.mensaje,
-                    options:[],
-                    type:this.type,
-                    idB = id+1}
-      this.actual.options.push(nodeAdd)
-      actual = nodeAdd
+    addMessage() {
+      let nodeAdd = {
+        message: this.mensaje,
+        options: [],
+        type: this.type,
+        idB: id + 1,
+      };
+      this.actual.options.push(nodeAdd);
+      actual = nodeAdd;
     },
-    findById(id){
+    findById(id) {
       if (this.actual.id == id) {
-        return this.actual
-      }
-      else{
+        return this.actual;
+      } else {
         for (let index = 0; index < this.actual.options.length; index++) {
           const element = this.actual.options[index];
-          return this.findById(id)
+          return this.findById(id);
         }
       }
-    }
-  }
-}
+    },
+  }, */
+  watch: {
+    json: function (val) {
+      this.$emit("jsonChange", val);
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

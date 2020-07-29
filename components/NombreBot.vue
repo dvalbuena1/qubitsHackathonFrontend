@@ -16,7 +16,7 @@ export default {
     async nombreBot() {
       var id = this.$auth.user.id;
       console.log(this.$auth.$storage);
-      const result = await this.$axios.$post(
+      /* const result = await this.$axios.$post(
         "v1/bot/" + id,
         {
           name: this.name,
@@ -26,8 +26,9 @@ export default {
             "x-auth-token": this.$auth.getToken("local"),
           },
         }
-      );
-      console.log(result);
+      ); */
+      this.$emit("botCreated");
+      /* console.log(result); */
     },
   },
 };
