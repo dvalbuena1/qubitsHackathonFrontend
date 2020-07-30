@@ -48,10 +48,10 @@ export default {
     SignUp,
   },
 
-  methods:{
-    logOut(){
-      this.$auth.logout(this.$auth.$storage);
-    }
+  methods: {
+    async logOut() {
+      await this.$auth.logout();
+    },
   },
 
   data() {

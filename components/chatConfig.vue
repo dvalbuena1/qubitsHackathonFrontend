@@ -42,7 +42,7 @@ export default {
       }
     },
     indent() {
-      var change = this.depth * 20;
+      var change = 1 - (1 - 1 / (1 + this.depth));
       //(1 - 1 / (1+ this.depth * 0.01)) * window.innerWidth;
       console.log(change);
       return { transform: `translate( ${change}px)` };

@@ -71,6 +71,7 @@ export default {
           logout: { url: '/auth/signout', method: 'get' }
         },
         tokenType: '',
+        autoFetchUser: false
       }
     },
     redirect: {
