@@ -19,6 +19,7 @@
       </v-btn>
     </v-app-bar>
 
+
     <!-- Generate overlay -->
     <sign-up :isVisible="overlay" @closeDialog="overlay = false" />
 
