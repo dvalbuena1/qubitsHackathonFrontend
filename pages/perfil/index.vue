@@ -39,7 +39,7 @@
         </v-card>
       </v-col>
       <v-col :cols="9">
-        <paginasList v-if="paginasSel"/>
+        <paginasList :paginas="paginas" v-if="paginasSel"/>
         <BotsList v-if="botsSelected"/>
         <UserInfo v-if="infoSelected"/>
       </v-col>
@@ -61,10 +61,17 @@ export default {
         }
       }
       const res = await this.$axios.$get('/v1/user/'+localStorage.getItem('id'),config)
-      this.$auth.setUser(res);
-      console.log(this.$auth.$storage.$state)
+
+      this.$auth.setUser(res)
+      // console.log(this.$auth.$storage.getState('user'))
+      // console.log(this.$auth.user)
+
+      const res2 = await this.$axios.$get('/v1/page/'+localStorage.getItem('id'),config)
+      this.paginas = res2
+
     },
   data: () => ({
+    paginas:[],
     item: 1,
     items: [
       { text: "Informacion", icon: "mdi-account" },
@@ -89,6 +96,7 @@ export default {
       this.paginasSel = false;
       this.infoSelected = true;
       this.botsSelected = false;
+      console.log(this.$auth.user.name)
     },
     botSelected() {
       this.paginasSel = false;

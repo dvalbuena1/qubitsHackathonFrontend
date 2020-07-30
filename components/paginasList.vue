@@ -4,7 +4,7 @@
       Paginas de Facebook:
     </h2>
     <ul>
-      <li v-bind:key="pagina.id" v-for="pagina in Paginas">
+      <li v-bind:key="pagina.id" v-for="pagina in paginas">
         <v-card class="mx-auto m-5 p-5" tile>
           <v-card-title>
             {{pagina.name}}
@@ -43,21 +43,22 @@
 
 <script>
 export default {
+  props:{
+    paginas:Array
+  },
   data: () => ({
-      Paginas: [],
+      //Paginas: [],
       agregar:false
     }),
-    async created(){
-      const config = {
-        headers:{
-          "x-auth-token": this.$auth.getToken("local")
-        }
-      }
-      const res = await this.$axios.$get('/v1/page/'+localStorage.getItem('id'),config)
-      this.$auth.setUser(res)
-      console.log(res)
-      this.Paginas = res
-    }
+    // async created(){
+    //   const config = {
+    //     headers:{
+    //       "x-auth-token": this.$auth.getToken("local")
+    //     }
+    //   }
+    //   const res = await this.$axios.$get('/v1/page/'+localStorage.getItem('id'),config)
+    //   this.Paginas = res
+    // }
 }
 </script>
 
