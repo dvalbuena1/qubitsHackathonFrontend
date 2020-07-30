@@ -32,17 +32,37 @@ export default {
       this.jsonCofig = value;
       console.log(this.jsonCofig);
     },
-    onSubmit() {
+    async onSubmit() {
       console.log(this.jsonCofig);
+      const config = {
+        headers:{
+          "x-auth-token": this.$auth.getToken("local")
+        }
+      }
+      var data = {
+        name:this.nomBot,
+        PageId:this.paginaBot
+      }
+      try{
+        const res = await this.$axios.$post('/v1/bot/'+localStorage.getItem('id'),data,config)
+      }
+      catch(error){
+        console.log(error)
+      }
+
+      this.$router.push("/perfil");
     },
     botCreated1(value){
       this.config = true
-      console.log("valor",value)
+      this.paginaBot = value[0].id
+      this.nomBot = value[1]
     }
   },
 
   data() {
     return {
+      nomBot:"",
+      paginaBot:"",
       paginas:[],
       config: false,
       jsonCofig: {
