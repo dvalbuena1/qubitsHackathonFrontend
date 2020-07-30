@@ -4,17 +4,12 @@
       <v-col :cols="3">
         <v-card
           class="mx-auto"
-
           tile
         >
         <!-- lista de opciones en el menu on click se muestra el componente que referencia la opcion-->
           <v-list rounded>
             <v-subheader>Perfil</v-subheader>
             <v-list-item-group v-model="item" color="primary">
-              <!-- <v-list-item
-                v-for="(item, i) in items"
-                :key="i"
-              >-->
               <v-list-item v-on:click="infSelected()">
                 <v-list-item-icon>
                   <v-icon v-text="items[0].icon"></v-icon>
@@ -58,6 +53,17 @@ import BotsList from "../../components/BotsList";
 import UserInfo from "../../components/UserInfo";
 export default {
   auth: true,
+  async created(){
+      this.paginasSel = true
+      const config = {
+        headers:{
+          "x-auth-token": this.$auth.getToken("local")
+        }
+      }
+      const res = await this.$axios.$get('/v1/user/'+localStorage.getItem('id'),config)
+      this.$auth.setUser(res);
+      console.log(this.$auth.$storage.$state)
+    },
   data: () => ({
     item: 1,
     items: [
@@ -78,7 +84,6 @@ export default {
       this.paginasSel = true;
       this.infoSelected = false;
       this.botsSelected = false;
-      console.log(this.$auth.$storage.$state)
     },
     infSelected() {
       this.paginasSel = false;

@@ -7,7 +7,7 @@
       <li v-bind:key="pagina.id" v-for="pagina in Paginas">
         <v-card class="mx-auto m-5 p-5" tile>
           <v-card-title>
-            {{pagina.nombre}}
+            {{pagina.name}}
             </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -23,7 +23,7 @@
               <v-btn
                     color="success"
                     class="ml-2 mb-2"
-                    to="/perfil/agregarPagina"
+                    to="/perfil/AgregarPagina"
                   >
                   Agregar Pagina
                   </v-btn>
@@ -37,12 +37,20 @@
 <script>
 export default {
   data: () => ({
-      Paginas: [
-        { nombre: 'Nombre pagina 1', url:'https://www.google.com',id: 1},
-        { nombre: 'Nombre pagina 2', url:'https://www.google.com',id: 2},
-        { nombre: 'Nombre pagina 3', url:'https://www.google.com',id: 3},
-      ],
+      Paginas: [],
+      agregar:false
     }),
+    async created(){
+      const config = {
+        headers:{
+          "x-auth-token": this.$auth.getToken("local")
+        }
+      }
+      const res = await this.$axios.$get('/v1/page/'+localStorage.getItem('id'),config)
+      this.$auth.setUser(res)
+      console.log(res)
+      this.Paginas = res
+    }
 }
 </script>
 
