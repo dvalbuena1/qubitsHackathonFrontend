@@ -3,7 +3,13 @@
     <h1>Creacion de Bot</h1>
     <p>A continuacion podrá realizar la configuración de su bot:</p>
     <NombreBot v-if="!config" @botCreated="config=true" />
-    <ChatConfig v-if="config" :json="jsonCofig" @jsonChange="jsonCofig=json" />
+    <v-form v-if="config" @submit.prevent="onSubmit">
+      <ChatConfig :propJson="jsonCofig" :first="true" v-on:jsonChange="change" :depth="1" />
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-btn type="submit">Finalizar</v-btn>
+      </v-row>
+    </v-form>
   </div>
 </template>
 
@@ -13,12 +19,15 @@ import chatConfig from "../../components/chatConfig";
 
 export default {
   methods: {
-    event() {
-      this.$on("jsonChange", (event) => {
-        console.log(event);
-      });
+    change(value) {
+      this.jsonCofig = value;
+      console.log(this.jsonCofig);
+    },
+    onSubmit() {
+      console.log(this.jsonCofig);
     },
   },
+
   data() {
     return {
       config: false,
