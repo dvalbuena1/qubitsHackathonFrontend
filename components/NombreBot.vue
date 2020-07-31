@@ -45,7 +45,7 @@ export default {
   methods: {
     async nombreBot() {
       var id = this.$auth.user.id;
-      var data = [this.select,this.name]
+      var data = [this.select, this.name];
       this.$emit("botCreated", data);
     },
     cancel() {

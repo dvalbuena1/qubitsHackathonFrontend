@@ -1,8 +1,7 @@
 <template>
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
-      <v-spacer></v-spacer>
-      <v-toolbar-title to="/">Qubit APP</v-toolbar-title>
+      <v-btn rounded to="/" style="text-transform: none;">Qubit APP</v-btn>
 
       <v-spacer />
 
@@ -18,7 +17,6 @@
         <v-icon>mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
-
 
     <!-- Generate overlay -->
     <sign-up :isVisible="overlay" @closeDialog="overlay = false" />

@@ -2,7 +2,7 @@
   <div>
     <h1>Creacion de Bot</h1>
     <p>A continuacion podrá realizar la configuración de su bot:</p>
-    <NombreBot v-if="!config" v-on:botCreated="botCreated1" :paginas="paginas"/>
+    <NombreBot v-if="!config" v-on:botCreated="botCreated1" :paginas="paginas" />
     <v-form v-if="config" @submit.prevent="onSubmit">
       <ChatConfig :propJson="jsonCofig" :first="true" v-on:jsonChange="change" :depth="1" />
       <v-row>
@@ -18,14 +18,17 @@ import NombreBot from "../../components/NombreBot";
 import chatConfig from "../../components/chatConfig";
 
 export default {
-  async created(){
+  async created() {
     const config = {
-        headers:{
-          "x-auth-token": this.$auth.getToken("local")
-        }
-      }
-    const res2 = await this.$axios.$get('/v1/page/'+localStorage.getItem('id'),config)
-    this.paginas = res2
+      headers: {
+        "x-auth-token": this.$auth.getToken("local"),
+      },
+    };
+    const res2 = await this.$axios.$get(
+      "/v1/page/" + localStorage.getItem("id"),
+      config
+    );
+    this.paginas = res2;
   },
   methods: {
     change(value) {
@@ -35,35 +38,91 @@ export default {
     async onSubmit() {
       console.log(this.jsonCofig);
       const config = {
-        headers:{
-          "x-auth-token": this.$auth.getToken("local")
-        }
-      }
+        headers: {
+          "x-auth-token": this.$auth.getToken("local"),
+        },
+      };
       var data = {
-        name:this.nomBot,
-        PageId:this.paginaBot
-      }
-      try{
-        const res = await this.$axios.$post('/v1/bot/'+localStorage.getItem('id'),data,config)
-      }
-      catch(error){
-        console.log(error)
+        name: this.nomBot,
+        pageId: this.paginaBot,
+      };
+      try {
+        this.$nuxt.$loading.start();
+        const res = await this.$axios.$post(
+          "/v1/bot/" + localStorage.getItem("id"),
+          data,
+          config
+        );
+
+        var idBot = res.id;
+
+        await this.firstConfigBot(idBot, this.jsonCofig, config);
+        this.$nuxt.$loading.finish();
+      } catch (error) {
+        this.$nuxt.$loading.finish();
+        console.log(error);
       }
 
       this.$router.push("/perfil");
     },
-    botCreated1(value){
-      this.config = true
-      this.paginaBot = value[0].id
-      this.nomBot = value[1]
-    }
+    async firstConfigBot(idBot, json, config) {
+      const res = await this.$axios.$post(
+        "v1/outflow/" + idBot,
+        {
+          message: json.message,
+        },
+        config
+      );
+      console.log("root", res)
+      for (let index = 0; index < json.options.length; index++) {
+        const element = json.options[index];
+        await this.configBot(idBot, res.id, element, config);
+      }
+    },
+    async configBot(idBot, previousId, json, config) {
+      const res = await this.$axios.$post(
+        "v1/inflow/" + idBot,
+        { message: json.name },
+        config
+      );
+      console.log("inflow",res)
+
+      const res2 = await this.$axios.$put(
+        "v1/inflow/" + res.id + "/Previous/" + previousId,
+        {},
+        config
+      );
+
+      const res3 = await this.$axios.$post(
+        "v1/outflow/" + idBot,
+        { message: json.message },
+        config
+      );
+      console.log("outflow",res)
+
+      const res4 = await this.$axios.$put(
+        "v1/outflow/" + res3.id + "/Previous/" + res.id,
+        {},
+        config
+      );
+
+      for (let index = 0; index < json.options.length; index++) {
+        const element = json.options[index];
+        await this.configBot(idBot, res3.id, element, config);
+      }
+    },
+    botCreated1(value) {
+      this.config = true;
+      this.paginaBot = value[0].id;
+      this.nomBot = value[1];
+    },
   },
 
   data() {
     return {
-      nomBot:"",
-      paginaBot:"",
-      paginas:[],
+      nomBot: "",
+      paginaBot: "",
+      paginas: [],
       config: false,
       jsonCofig: {
         name: "Menu Inicial",
