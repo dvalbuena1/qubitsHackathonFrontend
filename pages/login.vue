@@ -4,17 +4,18 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4">
-            <v-card class="elevation-12">
+            <v-card class="elevation-12"  min-width="500">
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Ingresar</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form @submit.prevent="onSubmit">
+                <v-form v-model="valid" @submit.prevent="onSubmit">
                   <v-text-field
                     v-model="email"
                     label="Login"
                     name="login"
+                    :rules="emailRules"
                     prepend-icon="mdi-account"
                     type="text"
                   ></v-text-field>
@@ -23,6 +24,7 @@
                     v-model="password"
                     id="password"
                     label="Password"
+                    :rules="passwordRules"
                     name="password"
                     prepend-icon="mdi-lock"
                     type="password"
@@ -30,7 +32,7 @@
 
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn type="submit" color="primary">Login</v-btn>
+                    <v-btn :disabled="!valid" block type="submit" color="primary">Login</v-btn>
                   </v-card-actions>
                 </v-form>
               </v-card-text>
@@ -43,6 +45,8 @@
 </template>
 
 <script>
+import Const from "../static/const.js";
+
 export default {
   auth: 'guest',
   layout: "login",
@@ -53,12 +57,20 @@ export default {
         password: this.password,
       };
       this.$nuxt.$loading.start();
-      const res = await this.$auth.loginWith("local", { data });
-      this.$auth.setUserToken(res.data.token);
-      console.log(this.$auth.$storage);
-      this.$auth.setUser(res.data.user);
-      this.$router.push("/perfil");
-      this.$nuxt.$loading.finish();
+      try {
+        const res = await this.$auth.loginWith("local", { data });
+        this.$nuxt.$loading.finish();
+
+        this.$auth.setUserToken(res.data.token);
+        console.log(this.$auth.$storage);
+
+        this.$auth.setUser(res.data.user);
+        localStorage.setItem("id", res.data.user.id);
+      } catch (error) {
+        this.$nuxt.$loading.finish();
+
+        console.log(error.response);
+      }
     },
   },
   props: {
@@ -66,10 +78,10 @@ export default {
   },
   data() {
     return {
+      valid: false,
       password: "",
       passwordRules: [
         (v) => !!v || "Contraseña requerida",
-        (v) => Const.passwordPattern.test(v) || "Contraseña invalida",
       ],
       email: "",
       emailRules: [

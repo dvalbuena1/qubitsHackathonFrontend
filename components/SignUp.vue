@@ -1,56 +1,45 @@
 <template>
-  <v-overlay :value="isVisible">
-    <v-card class="mx-auto" min-width="310">
-      <v-row>
-        <v-spacer></v-spacer>
-        <v-btn class="exit-btn" icon @click="$emit('closeDialog', $event)">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-      </v-row>
-      <v-card-title>
+  <v-dialog v-model="isVisible" max-width="382">
+    <v-card class="mx-auto">
+      <v-card-title class="headline">
         <h2>Unete a nosostros</h2>
       </v-card-title>
-      <v-card-text>
-        <v-form v-model="valid" @submit.prevent="onSubmit">
-          <v-container>
-            <v-row>
-              <v-col>
-                <v-text-field
-                  prepend-icon="mdi-account"
-                  v-model="name"
-                  :rules="nameRules"
-                  label="Nombre"
-                  required
-                ></v-text-field>
+      <v-form ref="form" v-model="valid" @submit.prevent="onSubmit">
+        <v-card-text>
+          <v-row>
+            <v-col>
+              <v-text-field
+                prepend-icon="mdi-account"
+                v-model="name"
+                :rules="nameRules"
+                label="Nombre"
+                required
+              ></v-text-field>
 
-                <v-text-field
-                  prepend-icon="mdi-email"
-                  v-model="email"
-                  :rules="emailRules"
-                  label="E-mail"
-                  required
-                ></v-text-field>
-                <v-text-field
-                  prepend-icon="mdi-lock"
-                  :type="'password'"
-                  v-model="password"
-                  :rules="passwordRules"
-                  label="Contraseña"
-                  required
-                ></v-text-field>
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col>
-                <v-btn type="submit" class="submit" color="blue" :disabled="!valid">Crear una cuenta</v-btn>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-form>
-      </v-card-text>
+              <v-text-field
+                prepend-icon="mdi-email"
+                v-model="email"
+                :rules="emailRules"
+                label="E-mail"
+                required
+              ></v-text-field>
+              <v-text-field
+                prepend-icon="mdi-lock"
+                :type="'password'"
+                v-model="password"
+                :rules="passwordRules"
+                label="Contraseña"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn block type="submit" class="submit" color="blue" :disabled="!valid">Crear una cuenta</v-btn>
+        </v-card-actions>
+      </v-form>
     </v-card>
-  </v-overlay>
+  </v-dialog>
 </template>
 
 <script>
@@ -59,6 +48,12 @@ const Swal = require("sweetalert2");
 
 export default {
   methods: {
+    openDialog() {
+      this.isVisible = true;
+    },
+    closeDialog() {
+      this.isVisible = false;
+    },
     async onSubmit() {
       var user = {
         name: this.name,
@@ -66,10 +61,9 @@ export default {
         password: this.password,
       };
 
-      const result = await this.$axios.$post("auth/register", user);
+      try {
+        const result = await this.$axios.$post("auth/register", user);
 
-      if (result) {
-        console.log(result);
         Swal.fire({
           icon: "success",
           title: "Registrado satisfactoriamente",
@@ -79,24 +73,20 @@ export default {
         this.$router.push("login");
         this.$emit("closeDialog");
         return;
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Se genero un error al intentar registrarse",
+        });
+        console.log(error);
       }
-
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Se genero un error al intentar registrarse",
-      });
-    },
-  },
-  props: {
-    isVisible: {
-      type: Boolean,
-      default: false,
     },
   },
 
   data() {
     return {
+      isVisible: false,
       valid: false,
       name: "",
       nameRules: [
@@ -120,7 +110,9 @@ export default {
 
 <style>
 .submit {
-  width: 18rem;
   text-transform: none;
+}
+.v-card {
+  padding: 20px;
 }
 </style>
