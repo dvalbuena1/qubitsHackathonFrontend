@@ -67,6 +67,7 @@ export default {
 
       const res2 = await this.$axios.$get('/v1/page/'+localStorage.getItem('id'),config)
       this.paginas = res2
+      console.log('paginas:',this.paginas)
 
       if(this.paginas.length == 0){
         this.pagEmpty = true
