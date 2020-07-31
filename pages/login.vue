@@ -4,7 +4,7 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4">
-            <v-card class="elevation-12"  min-width="500">
+            <v-card class="elevation-12" style="padding: 0px"  min-width="400">
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Ingresar</v-toolbar-title>
                 <v-spacer></v-spacer>

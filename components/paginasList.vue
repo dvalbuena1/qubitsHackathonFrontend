@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <v-subheader class="ml-6">Paginas de Facebook</v-subheader>
     <v-card class="ml-6">
 
       <v-toolbar color="teal" dark  rounded>
@@ -9,12 +9,9 @@
       <ul>
         <li v-if="pagEmpty">
           <br />
-          <v-alert
-            border="top"
-            colored-border
-            type="info"
-            elevation="2"
-          >No has vinculado ninguna página!</v-alert>si ya tienes todos los datos necesarios puedes proceder a agregar una pagina dandole click al boton de agregar pagina
+          <v-alert border="top" colored-border type="info" elevation="2">
+            <h4>No has vinculado ninguna página!</h4>Si ya tienes todos los datos necesarios puedes proceder a agregar una pagina dandole click al boton de agregar pagina
+          </v-alert>
         </li>
         <br />
         <li v-bind:key="pagina.id" v-for="(pagina, index) in paginas">
@@ -29,8 +26,11 @@
         <br />
         <li>
           <!-- <v-card-actions> -->
-          <v-btn color="success" class="mb-2" to="/perfil/AgregarPagina">Agregar Pagina</v-btn>
-          <v-btn color="primary" class="ml-2 mb-2" to="/comoAgregarPagina">¿Cómo agregar Página?</v-btn>
+          <v-row>
+            <v-spacer></v-spacer>
+            <v-btn color="success" class="mb-2" to="/perfil/AgregarPagina">Agregar Pagina</v-btn>
+            <v-btn color="primary" class="ml-2 mb-2" to="/comoAgregarPagina">¿Cómo agregar Página?</v-btn>
+          </v-row>
           <!-- </v-card-actions> -->
           <v-dialog v-model="dialog" max-width="290">
             <div class="text-center">

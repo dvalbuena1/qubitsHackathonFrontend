@@ -2,32 +2,18 @@
   <div>
     <ul>
       <li>
+        <v-subheader>Informacion personal</v-subheader>
         <v-card class="mx-auto m-5 p-5" tile>
-           <v-toolbar color="teal" dark  rounded>
-             <v-toolbar-title >Informacion Personal:</v-toolbar-title>
-             </v-toolbar>
-          <v-row>
-            <v-col :cols="3" class="ml-4 mt-3 font-weight-light">Nombre:</v-col>
-            <v-col :cols="8">
-              <v-text-field :value="auth.user.name" label="Solo" solo readonly></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col :cols="3" class="ml-4 mt-3 font-weight-light">Email:</v-col>
-            <v-col :cols="8">
-              <v-text-field :value="auth.user.email" label="Solo" solo readonly></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col :cols="3" class="ml-4 mt-3 font-weight-light">Contraseña:</v-col>
-            <v-col :cols="8">
-              <v-text-field v-model="password" label="Solo" solo readonly></v-text-field>
-            </v-col>
-          </v-row>
-          <v-card-actions>
+          <v-card-title>
+            <v-avatar class="mr-10" color="blue" size="100">
+              <span class="white--text headline">{{auth.user.name.charAt(0)}}</span>
+            </v-avatar>
+            <v-icon class="mr-6" size="50">mdi-account</v-icon>
+            <h1>{{auth.user.name}}</h1>
             <v-spacer></v-spacer>
-            <v-btn color="blue" class="mr-4 mb-4">Cambiar</v-btn>
-          </v-card-actions>
+            <v-icon size="30" class="mr-6">mdi-email</v-icon>
+            <h2>{{auth.user.email}}</h2>
+          </v-card-title>
         </v-card>
       </li>
     </ul>
