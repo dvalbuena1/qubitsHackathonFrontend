@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-main>
+     <v-main>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4">
@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  auth: "guest",
+  auth: 'guest',
   layout: "login",
   methods: {
     async onSubmit() {
@@ -52,23 +52,13 @@ export default {
         email: this.email,
         password: this.password,
       };
-
       this.$nuxt.$loading.start();
-      try {
-        const res = await this.$auth.loginWith("local", { data });
-        this.$nuxt.$loading.finish();
-
-        this.$auth.setUserToken(res.data.token);
-        console.log(this.$auth.$storage);
-
-        this.$auth.setUser(res.data.user);
-        localStorage.setItem('id', res.data.user.id);
-
-      } catch (error) {
-        this.$nuxt.$loading.finish();
-
-        console.log(error.response);
-      }
+      const res = await this.$auth.loginWith("local", { data });
+      this.$auth.setUserToken(res.data.token);
+      console.log(this.$auth.$storage);
+      this.$auth.setUser(res.data.user);
+      this.$router.push("/perfil");
+      this.$nuxt.$loading.finish();
     },
   },
   props: {

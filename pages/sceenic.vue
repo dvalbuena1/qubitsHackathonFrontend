@@ -1,15 +1,27 @@
 <template>
-  <div>
-    <v-btn @click.prevent="connect">Start</v-btn>
-    <v-btn @click.prevent="disconnect">Disconnect</v-btn>
-    <v-btn @click.prevent="videoOn">Video ON</v-btn>
-    <v-btn @click.prevent="videoOff">Video OFF</v-btn>
-    <v-btn @click.prevent="voiceOn">Voice ON</v-btn>
-    <v-btn @click.prevent="voiceOff">Voice Off</v-btn>
+  <div class="text-center">
+    <v-card class="align-center" color="dark" >
+      <v-flex text-xs-center>
+        <div id="example">
+        <!-- Container for video streams -->
+        </div>
+      </v-flex>
+    </v-card>
 
-    <div id="example">
-      <!-- Container for video streams -->
-    </div>
+    <v-btn rounded color="primary" @click.prevent="connect">Start</v-btn>
+
+    <v-btn  rounded color="primary" @click.prevent="disconnect">Disconnect</v-btn>
+
+    <v-btn  rounded color="primary" @click.prevent="videoOn">Video ON</v-btn>
+
+    <v-btn  rounded color="primary" @click.prevent="videoOff">Video OFF</v-btn>
+
+    <v-btn  rounded color="primary" @click.prevent="voiceOn">Voice ON</v-btn>
+
+    <v-btn  rounded color="primary" @click.prevent="voiceOff">Voice Off</v-btn>
+
+
+
   </div>
 </template>
 

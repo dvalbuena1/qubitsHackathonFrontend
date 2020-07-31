@@ -1,10 +1,12 @@
 <template>
   <div>
-    <h2>Qubit APP</h2>
-    <menuchat
-    :node="root"
 
-    />
+    <!-- <h2>Qubit APP</h2>
+    <menuchat
+    :node="root" -->
+
+
+
   </div>
 </template>
 
