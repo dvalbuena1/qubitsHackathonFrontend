@@ -40,7 +40,7 @@
       </v-col>
       <v-col :cols="9">
         <paginasList :paginas="paginas" :pagEmpty="pagEmpty" v-if="paginasSel"/>
-        <BotsList :botEmpty="botEmpty" :bots="bots" v-if="botsSelected"/>
+        <BotsList :botEmpty="botEmpty" :botInfo="botInfo" v-if="botsSelected"/>
         <UserInfo v-if="infoSelected"/>
       </v-col>
     </v-row>
@@ -60,7 +60,9 @@ export default {
           "x-auth-token": this.$auth.getToken("local")
         }
       }
-      const res = await this.$axios.$get('/v1/user/'+localStorage.getItem('id'),config)
+
+      try {
+        const res = await this.$axios.$get('/v1/user/'+localStorage.getItem('id'),config)
       this.$auth.setUser(res)
 
       const res2 = await this.$axios.$get('/v1/page/'+localStorage.getItem('id'),config)
@@ -70,17 +72,27 @@ export default {
         this.pagEmpty = true
       }
 
-      const res3 = await this.$axios.$get('/v1/bot/'+localStorage.getItem('id'),config)
-      this.bots = res3
-
-      if(this.bots.length == 0){
-        this.botEmpty = true
+      for (let index = 0; index < this.paginas.length; index++) {
+        const element1 = this.paginas[index];
+        const res3 = await this.$axios.$get('/v1/bot/'+element1.id,config)
+        if(res3.length != 0)
+          res3.forEach(element => {
+            this.botInfo.push({
+              name: element.name,
+              pageName: element1.name,
+              id: element.id
+            })
+          });
+      }
+      console.log(this.botInfo)
+      } catch (error) {
+        console.log(error)
       }
     },
   data: () => ({
+    botInfo:[],
     botEmpty:false,
     pagEmpty:false,
-    bots:[],
     paginas:[],
     item: 1,
     items: [

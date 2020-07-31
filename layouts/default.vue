@@ -8,13 +8,14 @@
       hide-on-scroll
       prominent
       scroll-target="#scrolling-techniques-4"
+      app
     >
       <router-link margin-bottom="10px" to="/">
         <v-img src="https://i.ibb.co/r3CnwVX/logo-qubot-4-0-final.png" height="130px" width="420px"></v-img>
       </router-link>
       <v-spacer />
       <v-container fluid >
-        <v-row justify="center" align="center" class="navbar_main">
+        <v-row justify="end" align="center">
           <!-- login button -->
           <v-btn v-if="!isAuthenticated" color="blue" style="margin:10px;" to="/login">Ingresar</v-btn>
           <!-- register button -->
@@ -45,7 +46,7 @@
     <sign-up ref="dialog" @closeDialog="closeDialog()" />
 
     <v-content>
-      <v-container>
+      <v-container class="pa-0 ma-0" fluid>
         <nuxt />
       </v-container>
     </v-content>
