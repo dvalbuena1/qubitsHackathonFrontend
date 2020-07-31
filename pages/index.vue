@@ -9,7 +9,7 @@
     <section id="intro">
       <v-parallax
         :height="$vuetify.breakpoint.smAndDown ? 700 : 500"
-        src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+        src="https://mk0hootsuiteblof6bud.kinstacdn.com/wp-content/uploads/2018/05/facebook-cover-photo-940x470.jpg"
       >
         <v-container fill>
           <v-row class="mx-auto">

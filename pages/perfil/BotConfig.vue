@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Creacion de Bot</h1>
+    <h1 >Creacion de Bot</h1>
     <p>A continuacion podrá realizar la configuración de su bot:</p>
     <NombreBot v-if="!config" v-on:botCreated="botCreated1" :paginas="paginas" />
     <v-form v-if="config" @submit.prevent="onSubmit">

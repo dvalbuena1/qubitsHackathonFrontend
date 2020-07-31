@@ -1,14 +1,20 @@
 <template>
   <div>
+     <v-parallax
+          :height="$vuetify.breakpoint.smAndDown ? 700 : 500"
+          src="https://i.ibb.co/dJbcBTY/facebook-cover-photo-940x470-v1-1.jpg">
     <v-row class="mr-16 pr-16">
       <v-col :cols="3">
         <v-card
+
           class="mx-auto"
           tile
         >
         <!-- lista de opciones en el menu on click se muestra el componente que referencia la opcion-->
           <v-list rounded>
-            <v-subheader>Perfil</v-subheader>
+             <v-toolbar color="teal" dark  rounded>
+             <v-toolbar-title>Perfil</v-toolbar-title>
+             </v-toolbar>
             <v-list-item-group v-model="item" color="primary">
               <v-list-item v-on:click="infSelected()">
                 <v-list-item-icon>
@@ -44,6 +50,7 @@
         <UserInfo v-if="infoSelected"/>
       </v-col>
     </v-row>
+     </v-parallax>
   </div>
 </template>
 

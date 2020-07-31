@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h2 class="ml-6">Informacion Personal:</h2>
     <ul>
       <li>
         <v-card class="mx-auto m-5 p-5" tile>
+           <v-toolbar color="teal" dark  rounded>
+             <v-toolbar-title >Informacion Personal:</v-toolbar-title>
+             </v-toolbar>
           <v-row>
             <v-col :cols="3" class="ml-4 mt-3 font-weight-light">Nombre:</v-col>
             <v-col :cols="8">

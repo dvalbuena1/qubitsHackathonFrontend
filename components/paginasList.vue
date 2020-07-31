@@ -1,7 +1,11 @@
 <template>
   <div>
-    <h2 class="ml-6">Paginas de Facebook:</h2>
+
     <v-card class="ml-6">
+
+      <v-toolbar color="teal" dark  rounded>
+             <v-toolbar-title >Paginas de Facebook:</v-toolbar-title>
+             </v-toolbar>
       <ul>
         <li v-if="pagEmpty">
           <br />

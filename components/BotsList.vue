@@ -1,7 +1,10 @@
 <template>
   <div>
-    <h2 class="ml-6">Bots:</h2>
+
     <v-card class="ml-6">
+       <v-toolbar color="teal" dark  rounded>
+             <v-toolbar-title >Bots:</v-toolbar-title>
+             </v-toolbar>
       <ul>
         <li v-bind:key="bot.id" v-for="(bot,index) in botInfo">
           <!-- <v-card-title> -->
