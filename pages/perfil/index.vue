@@ -39,8 +39,8 @@
         </v-card>
       </v-col>
       <v-col :cols="9">
-        <paginasList :paginas="paginas" v-if="paginasSel"/>
-        <BotsList v-if="botsSelected"/>
+        <paginasList :paginas="paginas" :pagEmpty="pagEmpty" v-if="paginasSel"/>
+        <BotsList :botEmpty="botEmpty" :bots="bots" v-if="botsSelected"/>
         <UserInfo v-if="infoSelected"/>
       </v-col>
     </v-row>
@@ -61,16 +61,26 @@ export default {
         }
       }
       const res = await this.$axios.$get('/v1/user/'+localStorage.getItem('id'),config)
-
       this.$auth.setUser(res)
-      // console.log(this.$auth.$storage.getState('user'))
-      // console.log(this.$auth.user)
 
       const res2 = await this.$axios.$get('/v1/page/'+localStorage.getItem('id'),config)
       this.paginas = res2
 
+      if(this.paginas.length == 0){
+        this.pagEmpty = true
+      }
+
+      const res3 = await this.$axios.$get('/v1/bot/'+localStorage.getItem('id'),config)
+      this.bots = res3
+
+      if(this.bots.length == 0){
+        this.botEmpty = true
+      }
     },
   data: () => ({
+    botEmpty:false,
+    pagEmpty:false,
+    bots:[],
     paginas:[],
     item: 1,
     items: [
@@ -96,7 +106,6 @@ export default {
       this.paginasSel = false;
       this.infoSelected = true;
       this.botsSelected = false;
-      console.log(this.$auth.user.name)
     },
     botSelected() {
       this.paginasSel = false;

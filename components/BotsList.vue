@@ -3,13 +3,12 @@
     <h2 class="ml-6">
       Bots:
     </h2>
+    <v-card>
     <ul>
-      <li v-bind:key="bot.id" v-for="bot in Bots">
-        <v-card class="mx-auto m-5 p-5" tile>
-          <v-card-title>
-          {{bot.nombre}}
-          </v-card-title>
-
+      <li v-bind:key="bot.id" v-for="bot in bots">
+          <!-- <v-card-title> -->
+          <h2>{{bot.nombre}}</h2>
+          <!-- </v-card-title> -->
           <p class="ml-4">Pagina:</p>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -20,12 +19,8 @@
             eliminar bot
             </v-btn>
           </v-card-actions>
-        </v-card>
       </li>
-    </ul>
-    <ul>
       <li>
-        <v-card>
           <v-card-actions>
             <v-btn
                   color="success"
@@ -35,22 +30,21 @@
                 Agregar bot
                 </v-btn>
           </v-card-actions>
-        </v-card>
       </li>
     </ul>
+    </v-card>
   </div>
 </template>
 
 <script>
 export default {
-data: () => ({
-      Bots: [
-        { nombre: 'Bot1', id: 1},
-        { nombre: 'Bot2', id: 2},
-        { nombre: 'Bot3', id: 3},
-      ],
+  props:{
+    botEmpty:Boolean,
+    bots:Array
+  },
+  data: () => ({
     }),
-}
+  }
 </script>
 
 <style scoped>

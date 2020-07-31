@@ -3,26 +3,43 @@
     <h2 class="ml-6">
       Paginas de Facebook:
     </h2>
+    <v-card class="ml-6">
     <ul>
-      <li v-bind:key="pagina.id" v-for="pagina in paginas">
-        <v-card class="mx-auto m-5 p-5" tile>
-          <v-card-title>
+      <li v-if="pagEmpty">
+        <br>
+         <v-alert
+          border="top"
+          colored-border
+          type="info"
+          elevation="2"
+          >
+          No has vinculado ninguna página!
+          si ya tienes todos los datos necesarios puedes proceder a agregar una pagina dandole click al boton de agregar pagina
+         </v-alert>
+      </li>
+      <br>
+      <li v-bind:key="pagina.id" v-for="(pagina, index) in paginas">
+        <!-- <v-card class="mx-auto m-5 p-5" tile> -->
+          <!-- <v-card-title> --><h2>
             {{pagina.name}}
-            </v-card-title>
+          <!-- </v-card-title> --></h2>
               <v-card-actions>
                 <v-spacer></v-spacer>
-              <v-btn class="mr-2 mb-2">
-                <a :href="pagina.url">Visita la pagina</a>
+              <v-btn class="mr-2 mb-2" color = "primary" :href="pagina.url">
+                Visita la pagina
+              </v-btn>
+              <v-btn class="mr-2 mb-2" color="error" @click.prevent="dialogIndex(index)">
+                Eliminar
               </v-btn>
             </v-card-actions>
-        </v-card>
+        <!-- </v-card> -->
       </li>
+      <br>
       <li>
-          <v-card>
-            <v-card-actions>
+            <!-- <v-card-actions> -->
               <v-btn
                     color="success"
-                    class="ml-2 mb-2"
+                    class="mb-2"
                     to="/perfil/AgregarPagina"
                   >
                   Agregar Pagina
@@ -34,31 +51,91 @@
                   >
                   ¿Cómo agregar Página?
                   </v-btn>
-            </v-card-actions>
-          </v-card>
+            <!-- </v-card-actions> -->
+            <v-dialog
+              v-model="dialog"
+              max-width="290"
+            >
+              <div class="text-center">
+                <v-card>
+                  <v-card-title>
+                  Eliminar página
+                  </v-card-title>
+                  <v-card-text class="text-left">
+                  <p>esta seguro de eliminar la pagina?</p>
+                  <p>No hay vuelta atras</p>
+                  </v-card-text>
+                <v-card-actions class="">
+                    <v-btn
+                      text
+                      @click="dialog = false"
+                    >
+                      cancelar
+                    </v-btn>
+
+                    <v-btn
+                      color="red"
+                      text
+                      @click.prevent="eliminarPagina"
+                    >
+                      eliminar
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </div>
+            </v-dialog>
         </li>
     </ul>
+    </v-card>
   </div>
 </template>
 
 <script>
 export default {
   props:{
-    paginas:Array
+    paginas:Array,
+    pagEmpty:Boolean,
   },
   data: () => ({
-      //Paginas: [],
-      agregar:false
+     //eliminar:false,
+      dialog:false,
+      agregar:false,
+      indexAct:0
     }),
-    // async created(){
-    //   const config = {
-    //     headers:{
-    //       "x-auth-token": this.$auth.getToken("local")
-    //     }
-    //   }
-    //   const res = await this.$axios.$get('/v1/page/'+localStorage.getItem('id'),config)
-    //   this.Paginas = res
-    // }
+  methods:{
+    // eliminarDial(){
+    //   this.dialog = false
+    //   //this.eliminar = true
+    // },
+    async eliminarPagina(){
+      this.dialog = false
+      console.log(this.paginas[this.indexAct].id)
+      const config = {
+        headers: {
+          "x-auth-token": this.$auth.getToken("local"),
+        },
+      };
+      try{
+        const res2 = await this.$axios.$delete(
+        "/v1/page/"+this.paginas[this.indexAct].id,
+        config
+        );
+        this.paginas.splice(this.indexAct, 1)
+      }
+      catch(error){
+        console.log(error)
+      }
+    },
+    dialogIndex(index){
+      this.dialog = true
+      this.indexAct = index
+    }
+  },
+  // watch:{
+  //   paginas(newValue,oldValue){
+
+  //   }
+
 }
 </script>
 
