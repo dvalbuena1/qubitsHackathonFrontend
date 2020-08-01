@@ -1,27 +1,60 @@
 <template>
   <div>
-
-    <v-card class="ml-6">
-       <v-toolbar color="teal" dark  rounded>
-             <v-toolbar-title >Bots:</v-toolbar-title>
-             </v-toolbar>
+    <v-card>
+      <v-toolbar color="teal" dark rounded short>
+        <v-toolbar-title>Bots</v-toolbar-title>
+      </v-toolbar>
       <ul>
+        <li v-if="botEmpty">
+          <br />
+          <v-alert border="top" colored-border type="info" elevation="2">
+            <h4>No has vinculado ningun bot a tus paginas!</h4>puedes proceder a agregar una bot dandole click al boton de agregar
+          </v-alert>
+        </li>
+        <br />
         <li v-bind:key="bot.id" v-for="(bot,index) in botInfo">
           <!-- <v-card-title> -->
-          <h2>{{bot.name}}</h2>
+          <h3>{{bot.name}}</h3>
           <!-- </v-card-title> -->
-          <v-card-text>
-            <p class="ml-4">Pagina: {{bot.pageName}}</p>
-          </v-card-text>
+          <p class="ml-4 mt-1 mb-0">Pagina: {{bot.pageName}}</p>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="error" class="mr-6" @click.prevent="dialogDeleteBot(index)">eliminar bot</v-btn>
+             <v-btn
+              color="error"
+                dark
+                small
+                bottom
+                left
+                fab
+                @click.prevent="dialogDeleteBot(index)"
+            >
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+            <!-- <v-btn
+              color="error"
+              class="mr-6"
+              @click.prevent="dialogDeleteBot(index)"
+              x-small
+            >eliminar</v-btn> -->
           </v-card-actions>
+          <v-divider></v-divider>
         </li>
+        <br />
         <li>
-          <v-card-actions>
-            <v-btn color="success" class="ml-2 mb-2" to="/perfil/Botconfig">Agregar bot</v-btn>
-          </v-card-actions>
+          <v-row>
+            <v-btn
+              color="teal"
+                dark
+                small
+                bottom
+                left
+                fab
+                to="/perfil/Botconfig"
+            >
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+            <!-- <v-btn color="success" class="ml-3 mb-2" to="/perfil/Botconfig" x-small>Agregar bot</v-btn> -->
+          </v-row>
           <v-dialog v-model="dialog" max-width="290">
             <div class="text-center">
               <v-card>
@@ -52,10 +85,11 @@ export default {
   },
   data: () => ({
     dialog: false,
-    indexDel:0
+    indexDel: 0,
   }),
   created() {
     console.log(this.botInfo);
+    console.log('empty?',this.botEmpty);
   },
   methods: {
     async eliminarBot() {
@@ -76,10 +110,10 @@ export default {
         console.log(error);
       }
     },
-    dialogDeleteBot(index){
-      this.indexDel = index
-      this.dialog = true
-    }
+    dialogDeleteBot(index) {
+      this.indexDel = index;
+      this.dialog = true;
+    },
   },
 };
 </script>

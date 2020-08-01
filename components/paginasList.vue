@@ -1,11 +1,10 @@
 <template>
   <div>
-    <v-subheader class="ml-6">Paginas de Facebook</v-subheader>
-    <v-card class="ml-6">
-
-      <v-toolbar color="teal" dark  rounded>
-             <v-toolbar-title >Paginas de Facebook:</v-toolbar-title>
-             </v-toolbar>
+    <!-- <v-subheader class="ml-6">Paginas de Facebook</v-subheader> -->
+    <v-card class>
+      <v-toolbar color="teal" dark rounded short>
+        <v-toolbar-title>Paginas de Facebook</v-toolbar-title>
+      </v-toolbar>
       <ul>
         <li v-if="pagEmpty">
           <br />
@@ -15,23 +14,39 @@
         </li>
         <br />
         <li v-bind:key="pagina.id" v-for="(pagina, index) in paginas">
-          <!-- <v-card class="mx-auto m-5 p-5" tile> -->
-          <h2>{{pagina.name}}</h2>
+          <h3>{{pagina.name}}</h3>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="mr-2 mb-2" color="primary" :href="pagina.url">Visita la pagina</v-btn>
-            <v-btn class="mr-2 mb-2" color="error" @click.prevent="dialogIndex(index)">Eliminar</v-btn>
+            <v-btn color="cyan lighten-2" dark small bottom left fab :href="pagina.url">
+              <v-icon>mdi-open-in-new</v-icon>
+            </v-btn>
+            <v-btn color="error" dark small bottom left fab @click.prevent="dialogIndex(index)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+            <!-- <v-btn class="mr-2 mb-2" color="cyan lighten-2" :href="pagina.url" x-small>Visitar</v-btn>
+            <v-btn class="mr-2 mb-2" color="error" @click.prevent="dialogIndex(index)" x-small>Eliminar</v-btn>-->
           </v-card-actions>
+          <v-divider></v-divider>
         </li>
-        <br />
         <li>
-          <!-- <v-card-actions> -->
           <v-row>
+            <v-btn color="teal" dark small bottom left fab to="/perfil/AgregarPagina">
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
             <v-spacer></v-spacer>
-            <v-btn color="success" class="mb-2" to="/perfil/AgregarPagina">Agregar Pagina</v-btn>
-            <v-btn color="primary" class="ml-2 mb-2" to="/comoAgregarPagina">¿Cómo agregar Página?</v-btn>
+            <v-btn
+              color="grey lighten-1"
+              dark
+              small
+              bottom
+              left
+              fab
+              to="/comoAgregarPagina"
+              class="mr-4"
+            >
+              <v-icon>mdi-information-outline</v-icon>
+            </v-btn>
           </v-row>
-          <!-- </v-card-actions> -->
           <v-dialog v-model="dialog" max-width="290">
             <div class="text-center">
               <v-card>
@@ -68,7 +83,6 @@ export default {
   methods: {
     async eliminarPagina() {
       this.dialog = false;
-      console.log(this.paginas[this.indexAct].id);
       const config = {
         headers: {
           "x-auth-token": this.$auth.getToken("local"),
@@ -79,7 +93,9 @@ export default {
           "/v1/page/" + this.paginas[this.indexAct].id,
           config
         );
-        this.paginas.splice(this.indexAct, 1);
+        //this.paginas.splice(this.indexAct, 1);
+
+        this.$router.go({ path: "/perfil", force: true });
       } catch (error) {
         console.log(error);
       }
