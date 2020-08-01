@@ -31,3 +31,5 @@ Para correr el back se debe ejecutar la linea npm run dev
 
 Luego de tener corriendo el back y el front se obtiene toda la funcionalidad.
 
+Es necesario tener instalado postgres para el funcionamiento de la base de datos.
+
