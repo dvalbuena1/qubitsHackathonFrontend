@@ -3,7 +3,6 @@
     <v-img
       dark
       src="https://cdn.discordapp.com/attachments/734978502641713214/738832429506363462/logo_qubot.PNG"
-      height="400px"
     ></v-img>
 
     <section id="intro">
@@ -82,75 +81,44 @@
       <div class="py-12"></div>
     </section>
 
-
-
-
-
     <section class="grey lighten-2">
-          <div class="py-8"></div>
-          <v-container class="text-center">
-          <h3 class="display-2 font-weight-bold mb-3" style="color:#272e61;">Conocenos</h3>
-          </v-container>
+      <div class="py-8"></div>
+      <v-container class="text-center">
+        <h3 class="display-2 font-weight-bold mb-3" style="color:#272e61;">Conocenos</h3>
+      </v-container>
 
-
-
-
-
-    <v-container class="grey lighten-5">
-      <v-row
-        no-gutters
-        style="height: 750px;"
-      >
-        <v-col
-          :align-self="align"
-          v-for="({ name, title, img }, i) in persons" :key="i" cols="12" md="4" style="border:5px;margin:5px;margin-left:40px;"
-
-        >
-
-           <v-card class="mx-auto" style="padding: 0px" max-width="434"  tile >
-           <v-img height="100%" src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg">
-            <v-row align="end" class="fill-height">
-              <v-col align-self="start" class="pa-0" cols="12">
-                <v-avatar class="profile" color="grey" size="164" tile>
-                  <v-img v-bind:src="img" ></v-img>
-               </v-avatar>
-              </v-col>
-             <v-col class="py-0">
-                <v-list-item color="rgba(0, 0, 0, .4)">
-                  <v-list-item-content>
-                    <v-list-item-title class="title"  v-text="name"></v-list-item-title>
-                   <v-list-item-subtitle v-text="title"> </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-
-              </v-row>
-            </v-img>
-          </v-card>
-        </v-col>
-
-
-
-
-
-
-
-
-      </v-row>
-    </v-container>
-
-
-
-
-
-
-
-
-
-
-
-      </section>
-    </v-container>
+      <v-container class="grey lighten-5">
+        <v-row no-gutters style="height: 750px;">
+          <v-col
+            :align-self="align"
+            v-for="({ name, title, img }, i) in persons"
+            :key="i"
+            style="border:5px;margin:5px;margin-left:40px;"
+          >
+            <v-card class="mx-auto" style="padding: 0px" max-width="434" tile>
+              <v-img height="100%" src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg">
+                <v-row align="end" class="fill-height">
+                  <v-col align-self="start" class="pa-0" cols="12">
+                    <v-avatar class="profile" color="grey" size="164" tile>
+                      <v-img v-bind:src="img"></v-img>
+                    </v-avatar>
+                  </v-col>
+                  <v-col class="py-0">
+                    <v-list-item color="rgba(0, 0, 0, .4)">
+                      <v-list-item-content>
+                        <v-list-item-title class="title" v-text="name"></v-list-item-title>
+                        <v-list-item-subtitle v-text="title"></v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                </v-row>
+              </v-img>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </section>
+  </v-container>
 </template>
 
 <script>
@@ -195,29 +163,28 @@ export default {
         {
           name: "Nicolas Londoño",
           title: "Ingeniero de Sistemas",
-          img: "https://cdn.vuetifyjs.com/images/profiles/marcus.jpg",
+          img: "https://i.imgur.com/0wHmDMj.jpg",
         },
         {
           name: "Juan David Villamil",
           title: "Ingeniero de Sistemas",
-          img: "https://cdn.vuetifyjs.com/images/profiles/marcus.jpg",
+          img: "https://i.imgur.com/0wHmDMj.jpg",
         },
         {
           name: "Daniel Valbuena",
           title: "Ingeniero de Sistemas",
-          img: "",
+          img: "https://i.imgur.com/0wHmDMj.jpg",
         },
         {
           name: "Pablo Garzon",
           title: "Ingeniero de Sistemas",
-          img: "",
+          img: "https://i.imgur.com/0wHmDMj.jpg",
         },
         {
           name: "Joshua Olave",
           title: "Ingeniero de Sistemas",
-          img: "",
+          img: "https://i.imgur.com/0wHmDMj.jpg",
         },
-
       ],
     };
   },

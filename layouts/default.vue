@@ -11,7 +11,11 @@
       app
     >
       <router-link to="/">
-        <v-img src="https://i.imgur.com/SiRWpcM.png" style="transform: translate( 0, -4px)" max-width="180px" ></v-img>
+        <v-img
+          src="https://i.imgur.com/SiRWpcM.png"
+          style="transform: translate( 0, -4px)"
+          max-width="180px"
+        ></v-img>
       </router-link>
       <v-spacer />
       <v-container fluid>
@@ -48,37 +52,26 @@
         <nuxt />
       </v-container>
     </v-content>
-     <section>
-      <v-card flat tile class="lighten-1 white--text text-center">
-        <v-card-text fluid style="align-center"
-          class="white--text pt-0"
-        ><v-card-title> Patrocinados por: </v-card-title>
-        <v-row
-        :align="align"
-        no-gutters
-        style="height: 150px;"
-      >
-        <v-col>
-           <v-img width="600" height="121" style="border:10px;margin:10px" src="https://i.ibb.co/yVFQ7QV/sceenic.png"></v-img>
-        </v-col>
-        <v-col>
-          <v-img  width="200" height="121" style="border:10px;margin:10px" src="https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/challenge_thumbnails/001/143/781/datas/original.jpg"></v-img>
-        </v-col>
-        </v-row>
 
+    <v-footer padless>
+      <v-card flat tile>
+        <v-card-text fluid>
+          <h3>Sponsors</h3>
+          <v-row>
+            <v-col cols="6">
+              <v-img height="180px" src="https://i.imgur.com/YsZjyuk.png"></v-img>
+            </v-col>
+            <v-col cols="6">
+              <v-img width="500px" src="https://i.imgur.com/af4CgTQ.png"></v-img>
+            </v-col>
+          </v-row>
+        </v-card-text>
 
-
+        <v-divider></v-divider>
+        <v-card-text class="white--text text-center">
+          <span>&copy; {{ new Date().getFullYear() }}</span>
         </v-card-text>
       </v-card>
-      </section>
-    <v-footer padless>
-
-
-
-      <v-divider></v-divider>
-      <v-card-text class="white--text text-center">
-        <span>&copy; {{ new Date().getFullYear() }}</span>
-      </v-card-text>
     </v-footer>
   </v-app>
 </template>
@@ -136,7 +129,7 @@ export default {
 };
 </script>
 
-<style>
+<style scope>
 .exit-btn {
   margin-top: 0.5rem;
   margin-right: 1rem;
