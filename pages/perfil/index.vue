@@ -1,20 +1,17 @@
 <template>
   <div>
-     <v-parallax
-          :height="$vuetify.breakpoint.smAndDown ? 700 : 500"
-          src="https://i.ibb.co/dJbcBTY/facebook-cover-photo-940x470-v1-1.jpg">
-    <v-row class="mr-16 pr-16">
-      <v-col :cols="3">
-        <v-card
-
-          class="mx-auto"
-          tile
-        >
-        <!-- lista de opciones en el menu on click se muestra el componente que referencia la opcion-->
-          <v-list rounded>
-             <v-toolbar color="teal" dark  rounded>
-             <v-toolbar-title>Perfil</v-toolbar-title>
-             </v-toolbar>
+    <!-- <v-parallax
+      :height="$vuetify.breakpoint.smAndDown ? 700 : 500"
+      src="https://i.ibb.co/dJbcBTY/facebook-cover-photo-940x470-v1-1.jpg"
+    >-->
+    <v-row justify="center">
+      <!-- <v-col :cols="3">
+        <v-card class="mx-auto" tile> -->
+          <!-- lista de opciones en el menu on click se muestra el componente que referencia la opcion -->
+           <!-- <v-list rounded>
+            <v-toolbar color="teal" dark rounded>
+              <v-toolbar-title>Perfil</v-toolbar-title>
+            </v-toolbar>
             <v-list-item-group v-model="item" color="primary">
               <v-list-item v-on:click="infSelected()">
                 <v-list-item-icon>
@@ -43,14 +40,22 @@
             </v-list-item-group>
           </v-list>
         </v-card>
-      </v-col>
-      <v-col :cols="9">
-        <paginasList :paginas="paginas" :pagEmpty="pagEmpty" v-if="paginasSel"/>
-        <BotsList :botEmpty="botEmpty" :botInfo="botInfo" v-if="botsSelected"/>
-        <UserInfo v-if="infoSelected"/>
+      </v-col> -->
+      <v-col :cols="8">
+        <v-card v-if="infoSelected">
+          <UserInfo />
+        </v-card>
+          <v-row>
+            <v-col class="pr-2">
+              <paginasList :paginas="paginas" :pagEmpty="pagEmpty"/>
+            </v-col>
+            <v-col class="pl-2" >
+              <BotsList :botEmpty="botEmpty" :botInfo="botInfo"/>
+            </v-col>
+          </v-row>
       </v-col>
     </v-row>
-     </v-parallax>
+    <!-- </v-parallax> -->
   </div>
 </template>
 
@@ -60,48 +65,61 @@ import BotsList from "../../components/BotsList";
 import UserInfo from "../../components/UserInfo";
 export default {
   auth: true,
-  async created(){
-      this.paginasSel = true
-      const config = {
-        headers:{
-          "x-auth-token": this.$auth.getToken("local")
-        }
-      }
+  async created() {
+    const config = {
+      headers: {
+        "x-auth-token": this.$auth.getToken("local"),
+      },
+    };
 
-      try {
-        const res = await this.$axios.$get('/v1/user/'+localStorage.getItem('id'),config)
-      this.$auth.setUser(res)
+    try {
+      const res = await this.$axios.$get(
+        "/v1/user/" + localStorage.getItem("id"),
+        config
+      );
+      this.$auth.setUser(res);
 
-      const res2 = await this.$axios.$get('/v1/page/'+localStorage.getItem('id'),config)
-      this.paginas = res2
-      console.log('paginas:',this.paginas)
+      const res2 = await this.$axios.$get(
+        "/v1/page/" + localStorage.getItem("id"),
+        config
+      );
+      this.paginas = res2;
+      console.log("paginas:", this.paginas);
 
-      if(this.paginas.length == 0){
-        this.pagEmpty = true
+      if (this.paginas.length == 0) {
+        this.pagEmpty = true;
       }
 
       for (let index = 0; index < this.paginas.length; index++) {
         const element1 = this.paginas[index];
-        const res3 = await this.$axios.$get('/v1/bot/'+element1.id,config)
-        if(res3.length != 0)
-          res3.forEach(element => {
+        const res3 = await this.$axios.$get("/v1/bot/" + element1.id, config);
+        if (res3.length != 0)
+        { res3.forEach((element) => {
             this.botInfo.push({
               name: element.name,
               pageName: element1.name,
-              id: element.id
-            })
+              id: element.id,
+            });
           });
+          this.botEmpty = false
+        }
+        // if(index == this.paginas.length - 1)
+        // {
+        //  this.loaded
+        // }
       }
-      console.log(this.botInfo)
-      } catch (error) {
-        console.log(error)
-      }
-    },
+      console.log(this.botInfo);
+      this.infoSelected = true;
+    } catch (error) {
+      console.log(error);
+    }
+  },
   data: () => ({
-    botInfo:[],
-    botEmpty:false,
-    pagEmpty:false,
-    paginas:[],
+    loaded:false,
+    botInfo: [],
+    botEmpty: true,
+    pagEmpty: false,
+    paginas: [],
     item: 1,
     items: [
       { text: "Informacion", icon: "mdi-account" },
@@ -117,21 +135,7 @@ export default {
     BotsList,
   },
   methods: {
-    pagSelected() {
-      this.paginasSel = true;
-      this.infoSelected = false;
-      this.botsSelected = false;
-    },
-    infSelected() {
-      this.paginasSel = false;
-      this.infoSelected = true;
-      this.botsSelected = false;
-    },
-    botSelected() {
-      this.paginasSel = false;
-      this.infoSelected = false;
-      this.botsSelected = true;
-    },
+
   },
 };
 </script>
