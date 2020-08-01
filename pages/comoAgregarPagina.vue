@@ -78,11 +78,20 @@ export default {
         },
         {
           name: "Paso 11",
-          description: "Dirigete a la seccion llamada 'Webhooks' y oprime el 'Agregar URL...'"
+          description:
+            "Dirigete a la seccion llamada 'Webhooks' y oprime el 'Agregar URL...'",
+          image: "Paso11.PNG",
+        },
+        {
+          name: "Paso 12",
+          description:
+            "En la venta emergente ingrese en la seccion de 'URL de devolucion de llama' el siguiente texto: 'http://qubits-backend.us-west-2.elasticbeanstalk.com/'. Finalmente en la seccion 'Token de verificacion' ingrese 'qubits' ",
+          image: "Paso12.PNG",
         },
         {
           name: "Paso 13",
-          description: "En la venta emergente ingrese en la seccion de 'URL de devolucion de llama' el siguiente texto: 'http://qubits-backend.us-west-2.elasticbeanstalk.com/' \n Finalmente en la seccion 'Token de verificacion' ingrese 'qubits' ",
+          description:
+            "Ve a 'Configuración  Básica'",
           image: "Paso13.PNG",
         },
         {

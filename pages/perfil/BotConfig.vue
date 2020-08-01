@@ -72,7 +72,11 @@ export default {
       this.$router.push("/perfil");
     },
     async firstConfigBot(idBot, json, config) {
-      const res = await this.$axios.$post("v1/outflow/" + idBot, {}, config);
+      const res = await this.$axios.$post(
+        "v1/outflow/" + idBot,
+        { first: true },
+        config
+      );
       json.message = this.checkMessage(json.message);
       const res2 = await this.$axios.$post(
         "v1/messegeOut/" + res.id,
