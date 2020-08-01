@@ -12,11 +12,12 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.12.0",
+    "@nuxtjs/toast": "^3.3.1",
     "@sscale/wtsdk": "^1.0.16",
     "dotenv": "^8.2.0",
-    "nuxt": "^2.13.3",
-    "sweetalert2": "^9.17.1",
-    "vue-toasted": "^1.1.28"
+    "material-design-icons": "^3.0.1",
+    "material-icons": "^0.3.1",
+    "nuxt": "^2.13.3"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.2"

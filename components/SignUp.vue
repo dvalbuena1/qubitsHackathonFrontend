@@ -44,7 +44,6 @@
 
 <script>
 import Const from "../static/const.js";
-const Swal = require("sweetalert2");
 
 export default {
   methods: {
@@ -54,7 +53,23 @@ export default {
     closeDialog() {
       this.isVisible = false;
     },
+    checkName() {
+      var arr = this.name.split(" ");
+      var arr2 = new Array();
+      arr.map((val) => {
+        if (val != "") {
+          val = val.charAt(0).toUpperCase() + val.slice(1);
+          arr2.push(val);
+        }
+      });
+
+      this.name = arr2.join(" ");
+      console.log(this.name);
+    },
+
     async onSubmit() {
+      this.checkName();
+
       var user = {
         name: this.name,
         email: this.email,
@@ -64,20 +79,18 @@ export default {
       try {
         const result = await this.$axios.$post("auth/register", user);
 
-        Swal.fire({
-          icon: "success",
-          title: "Registrado satisfactoriamente",
-          showConfirmButton: false,
-          timer: 2000,
+        this.$toast.success("Te has registrado!", {
+          icon: "check",
+          duration: 5000,
         });
+
         this.$router.push("login");
         this.$emit("closeDialog");
         return;
       } catch (error) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Se genero un error al intentar registrarse",
+        this.$toasted.error("Se ha presentado un error, vuelve ha intentarlo", {
+          icon: "report_problem",
+          duration: 5000,
         });
         console.log(error);
       }

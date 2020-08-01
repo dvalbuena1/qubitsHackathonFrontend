@@ -59,6 +59,11 @@ export default {
       this.$nuxt.$loading.start();
       try {
         const res = await this.$auth.loginWith("local", { data });
+        this.$toast.show("Auntenticado!", {
+          theme: "outline",
+          icon: "fingerprint",
+          duration: 5000,
+        });
         this.$nuxt.$loading.finish();
 
         this.$auth.setUserToken(res.data.token);

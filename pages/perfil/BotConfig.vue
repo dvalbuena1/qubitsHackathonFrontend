@@ -1,10 +1,16 @@
 <template>
   <div>
-    <h1 >Creacion de Bot</h1>
+    <h1>Creacion de Bot</h1>
     <p>A continuacion podrá realizar la configuración de su bot:</p>
     <NombreBot v-if="!config" v-on:botCreated="botCreated1" :paginas="paginas" />
     <v-form v-if="config" @submit.prevent="onSubmit">
-      <ChatConfig :propJson="jsonCofig" :first="true" v-on:jsonChange="change" :depth="1" />
+      <ChatConfig
+        :propJson="jsonCofig"
+        :first="true"
+        v-on:jsonChange="change"
+        :depth="1"
+        :index="1"
+      />
       <v-row>
         <v-spacer></v-spacer>
         <v-btn type="submit">Finalizar</v-btn>
@@ -66,26 +72,25 @@ export default {
       this.$router.push("/perfil");
     },
     async firstConfigBot(idBot, json, config) {
-      const res = await this.$axios.$post(
-        "v1/outflow/" + idBot,
+      const res = await this.$axios.$post("v1/outflow/" + idBot, {}, config);
+      json.message = this.checkMessage(json.message);
+      const res2 = await this.$axios.$post(
+        "v1/messegeOut/" + res.id,
         {
           message: json.message,
         },
         config
       );
-      console.log("root", res)
+
+      console.log("root", res);
       for (let index = 0; index < json.options.length; index++) {
         const element = json.options[index];
         await this.configBot(idBot, res.id, element, config);
       }
     },
     async configBot(idBot, previousId, json, config) {
-      const res = await this.$axios.$post(
-        "v1/inflow/" + idBot,
-        { message: json.name },
-        config
-      );
-      console.log("inflow",res)
+      const res = await this.$axios.$post("v1/inflow/" + idBot, {}, config);
+      console.log("inflow", res);
 
       const res2 = await this.$axios.$put(
         "v1/inflow/" + res.id + "/Previous/" + previousId,
@@ -94,22 +99,44 @@ export default {
       );
 
       const res3 = await this.$axios.$post(
+        "v1/messegeIn/" + res.id,
+        {
+          message: json.name,
+        },
+        config
+      );
+
+      const res4 = await this.$axios.$post(
         "v1/outflow/" + idBot,
         { message: json.message },
         config
       );
-      console.log("outflow",res)
+      console.log("outflow", res);
 
-      const res4 = await this.$axios.$put(
-        "v1/outflow/" + res3.id + "/Previous/" + res.id,
+      const res5 = await this.$axios.$put(
+        "v1/outflow/" + res4.id + "/Previous/" + res.id,
         {},
+        config
+      );
+      json.message = this.checkMessage(json.message);
+      const res6 = await this.$axios.$post(
+        "v1/messegeOut/" + res4.id,
+        {
+          message: json.message,
+        },
         config
       );
 
       for (let index = 0; index < json.options.length; index++) {
         const element = json.options[index];
-        await this.configBot(idBot, res3.id, element, config);
+        await this.configBot(idBot, res4.id, element, config);
       }
+    },
+    checkMessage(message) {
+      if (message.attachment.payload.url == "") {
+        message.attachment = null;
+      }
+      return message;
     },
     botCreated1(value) {
       this.config = true;
@@ -120,13 +147,23 @@ export default {
 
   data() {
     return {
+      valid: false,
       nomBot: "",
       paginaBot: "",
       paginas: [],
       config: false,
       jsonCofig: {
-        name: "Menu Inicial",
-        message: "",
+        name: { text: "Menu Inicial" },
+        message: {
+          text: "",
+          attachment: {
+            type: "",
+            payload: {
+              url: "",
+              is_reusable: false,
+            },
+          },
+        },
         options: [],
       },
     };

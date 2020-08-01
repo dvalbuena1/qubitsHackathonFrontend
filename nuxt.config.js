@@ -26,13 +26,15 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lato&family=Montserrat' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Roboto' },
     ]
   },
   /*
   ** Global CSS
   */
   css: [
+    "../node_modules/material-icons/iconfont/material-icons.css",
+    "../assets/fonts.css"
   ],
   /*
   ** Plugins to load before mounting the App
@@ -56,7 +58,8 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    '@nuxtjs/toast'
   ],
   /* Axios */
   axios: {
@@ -84,6 +87,10 @@ export default {
   },
   router: {
     middleware: ['auth']
+  },
+  toast: {
+    position: 'bottom-right',
+    className: ['robotoFont']
   },
   /*
   ** vuetify module configuration

@@ -27,7 +27,6 @@
 </template>
 
 <script>
-const Swal = require("sweetalert2");
 export default {
 data: () => ({
       valid:false,
@@ -58,22 +57,11 @@ methods: {
       console.log(localStorage.getItem('id'))
       try{
         const result = await this.$axios.$post("v1/page/"+localStorage.getItem('id'), page, config)
-        Swal.fire(
-          'Bien!',
-          'solicitud procesada correctamente!',
-          'success'
-        )
         this.$router.push("/perfil");
       }
       catch(error)
       {
         this.$refs.form.reset()
-        Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'No se puede procesar su solicitud',
-        //footer: '<a href>Why do I have this issue?</a>'
-        })
       }
     }
 }
