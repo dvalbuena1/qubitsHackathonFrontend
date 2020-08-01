@@ -78,14 +78,18 @@ export default {
         },
         {
           name: "Paso 11",
-          description: "Ve a 'Configuración Básica'",
-          image: "Paso11.PNG",
+          description: "Dirigete a la seccion llamada 'Webhooks' y oprime el 'Agregar URL...'"
         },
         {
-          name: "Paso 12",
+          name: "Paso 13",
+          description: "En la venta emergente ingrese en la seccion de 'URL de devolucion de llama' el siguiente texto: 'http://qubits-backend.us-west-2.elasticbeanstalk.com/' \n Finalmente en la seccion 'Token de verificacion' ingrese 'qubits' ",
+          image: "Paso13.PNG",
+        },
+        {
+          name: "Paso 14",
           description:
             'Dale clic a "Mostrar" en "Clave secreta de app" y copiala. Ya con estos cuatro valores puedes configurar tu página de Facebook.',
-          image: "Paso12.PNG",
+          image: "Paso14.PNG",
         },
       ],
     };

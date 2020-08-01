@@ -98,11 +98,16 @@ export default {
         config
       );
 
+      var data = {
+        message: json.name,
+      };
+      if (json.message.text == "www.nuestraUrl.com/sceenic/{{ID}}") {
+        data.url = "www.nuestraUrl.com/sceenic/{{ID}}";
+      }
+
       const res3 = await this.$axios.$post(
         "v1/messegeIn/" + res.id,
-        {
-          message: json.name,
-        },
+        data,
         config
       );
 
