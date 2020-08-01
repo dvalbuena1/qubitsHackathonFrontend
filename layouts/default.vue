@@ -48,13 +48,33 @@
         <nuxt />
       </v-container>
     </v-content>
-
-    <v-footer padless>
+     <section>
       <v-card flat tile class="lighten-1 white--text text-center">
-        <v-card-text
+        <v-card-text fluid style="align-center"
           class="white--text pt-0"
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec sagittis lectus. Donec tincidunt mi vitae mollis egestas. Donec mauris justo, rutrum non massa quis, ultricies ullamcorper lacus. Proin ac massa nulla. Proin condimentum felis at massa vehicula egestas. Sed pellentesque purus id magna vehicula sagittis. Donec ac varius risus, at luctus velit. Pellentesque aliquam quam vitae consectetur malesuada. Aenean laoreet nisi non nisl mollis maximus sit amet at erat. Donec varius ligula quis ipsum tempor vestibulum. Vestibulum at nisi justo. In eleifend tortor eleifend ante finibus, at vulputate dolor fringilla. Ut at augue lobortis, laoreet nibh a, lacinia risus.</v-card-text>
+        ><v-card-title> Patrocinados por: </v-card-title>
+        <v-row
+        :align="align"
+        no-gutters
+        style="height: 150px;"
+      >
+        <v-col>
+           <v-img width="600" height="121" style="border:10px;margin:10px" src="https://i.ibb.co/yVFQ7QV/sceenic.png"></v-img>
+        </v-col>
+        <v-col>
+          <v-img  width="200" height="121" style="border:10px;margin:10px" src="https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/challenge_thumbnails/001/143/781/datas/original.jpg"></v-img>
+        </v-col>
+        </v-row>
+
+
+
+        </v-card-text>
       </v-card>
+      </section>
+    <v-footer padless>
+
+
+
       <v-divider></v-divider>
       <v-card-text class="white--text text-center">
         <span>&copy; {{ new Date().getFullYear() }}</span>
