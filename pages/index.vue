@@ -14,28 +14,28 @@
           <v-row class="mx-auto">
             <v-col>
               <div class="text-center">
-                <v-card
+                <!-- <v-card
                   color="transparent"
                   class="display-3 font-weight-black mb-4"
                   style="margin:120px;"
-                >
-                  <v-card-title>Incrementa tus ventas de manera automatica</v-card-title>
-                  <v-card-subtitle>Ayudamos a tu negocio a comer monda</v-card-subtitle>
+                > -->
+                  <v-card-title><h1>Incrementa tus ventas de manera automatica</h1></v-card-title>
+                  <v-card-text>recopila estadisticas</v-card-text>
                   <v-card-actions>
-                    <v-btn text to="../pages/comoAgregarPagina">Averigua como</v-btn>
+                    <v-btn text to="../login">Averigua como Agregar tu primera pagina</v-btn>
                   </v-card-actions>
-                </v-card>
+                <!-- </v-card> -->
               </div>
             </v-col>
 
-            <v-card
+            <!-- <v-card
               color="transparent"
               class="title font-weight-regular text-uppercase"
               style="margin:120px;"
-            >
-              <v-card-title>No se que escribir aca</v-card-title>
-              <v-card-subtitle>x2</v-card-subtitle>
-            </v-card>
+            > -->
+              <v-card-title>El mejor servicio de bots para paginas de Facebook</v-card-title>
+              <v-card-subtitle></v-card-subtitle>
+            <!-- </v-card> -->
           </v-row>
         </v-container>
       </v-parallax>
@@ -67,7 +67,7 @@
               </v-theme-provider>
 
               <v-card-title
-                style="color:#272e61; font-family: 'Lato';"
+                style="color:#272e61; font-family: 'Lato'; justify-content:center;"
                 class="wpd_wrapper"
                 v-text="title"
               ></v-card-title>
@@ -144,18 +144,18 @@ export default {
       features: [
         {
           icon: "mdi-contacts",
-          title: "Coneccion rapida y segura en tiempo real con tus clientes",
-          text: "Pablo me la chupa",
+          title: "Coneccion rapida y segura en tiempo real",
+          text: "tus clientes nunca tendran que esperar",
         },
         {
           icon: "mdi-sitemap",
-          title: "Respuesta rapida y eficiente a cualquier cliente",
-          text: "Pablo me la chupa",
+          title: "Personalizacion facil e instantanea",
+          text: "crear un bot nunca ha sido mas facil",
         },
         {
-          icon: "mdi-robot",
-          title: "Automatizacion de servicios",
-          text: "Pablo me la chupa",
+          icon: "mdi-phone",
+          title: "videollamadas integradas",
+          text: "sceenic integrado en tu bot",
         },
       ],
 

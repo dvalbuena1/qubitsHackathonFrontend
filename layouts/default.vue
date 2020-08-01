@@ -54,14 +54,15 @@
     </v-content>
 
     <v-footer padless>
-      <v-card flat tile>
+      <v-card flat tile class="text-center" width="100%">
         <v-card-text fluid>
           <h3>Sponsors</h3>
           <v-row>
             <v-col cols="6">
               <v-img height="180px" src="https://i.imgur.com/YsZjyuk.png"></v-img>
             </v-col>
-            <v-col cols="6">
+            <v-col cols="1"></v-col>
+            <v-col cols="5">
               <v-img width="500px" src="https://i.imgur.com/af4CgTQ.png"></v-img>
             </v-col>
           </v-row>
@@ -136,5 +137,8 @@ export default {
 }
 v-card-title {
   text-align: center;
+}
+.v-footer{
+  justify-content: center;
 }
 </style>
