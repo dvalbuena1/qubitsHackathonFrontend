@@ -103,7 +103,7 @@
       >
         <v-col
           :align-self="align"
-          v-for="({ name, title, img }, i) in persons" :key="i" cols="12" md="4" style="border:5px;margin:5px"
+          v-for="({ name, title, img }, i) in persons" :key="i" cols="12" md="4" style="border:5px;margin:5px;margin-left:40px;"
 
         >
 
